@@ -7,22 +7,26 @@ import SettingsPage from './pages/SettingsPage';
 import ProfilePage from './pages/ProfilePage';
 import {Loader} from "lucide-react";
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuthStore } from './store/useAuthStore';
+import { useEffect } from 'react';
+// import {useThemeStore} from "./store/"
 
 const App = () => {
-    // const {authUser, checkAuth, isCheckingAuth} = useAuthStore();
+    const {authUser, checkAuth, isCheckingAuth} = useAuthStore();
 
-    // useEffect(()=>{
-    //   checkAuth();
-    // }, [checkAuth]);
+    useEffect(()=>{
+      checkAuth();
+    }, [checkAuth]);
 
-    // console.log({authUser});
+    console.log({authUser});
 
-    // if(isCheckingAuth && !authUser) return(
-    //   <div className="flex items-center justify-center h-screen">
-    //     <Loader className="size-10 animate-spin"/>
-    //   </div>
-    // )
+    if (isCheckingAuth && !authUser)
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <Loader className="size-10 animate-spin" />
+        </div>
+      );
 
     return (
     <div>
